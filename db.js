@@ -4,7 +4,11 @@ const connectionUrl = process.env.DATABASE_URL
 
 
 const connect = (onConnect) =>{
-    mongoose.connect(connectionUrl)
+    mongoose.connect(connectionUrl, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    
     const db = mongoose.connection
     
     db.on('error', (error) => {
