@@ -5,8 +5,7 @@ async function getUsers(req,res){
         const users = await UserModel.find()
         res.send(users)
     }catch(error){
-        res.status(error.status)
-        res.send(error.message)
+        res.status(error.status || 404).json({message: error.message})
     }
 }
 
@@ -30,7 +29,7 @@ async function addNewUser(req, res){
 
         res.status(201).json(savedUser)
     }catch(error){
-        res.status(error.status).json({message: error.message})
+        res.status(error.status || 400).json({message: error.message})
     }
 }
 
@@ -45,7 +44,7 @@ async function updateUser(req, res){
 
         res.status(200).json(updatedResponse)
     }catch(error){
-        res.status(error.status || 404).json({message: error.message})
+        res.status(error.status || 403).json({message: error.message})
     }
 }
 
