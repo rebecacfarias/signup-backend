@@ -12,7 +12,7 @@ app.use('/users', userRoutes)
 
 
 db.connect(() => {
-    app.listen(process.env.PORT, () => {
+    app.listen(process.env.SERVER_PORT, () => {
         console.log('Server Started')
     })
 })

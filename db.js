@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const connectionUrl = process.env.DATABASE_URL
+const connectionUrl = process.env.MONGO_URL
 
 
 const connect = (onConnect) =>{
@@ -8,7 +8,7 @@ const connect = (onConnect) =>{
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
-    
+
     const db = mongoose.connection
     
     db.on('error', (error) => {
