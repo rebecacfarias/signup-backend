@@ -29,7 +29,7 @@ async function addNewUser(req, res){
 
         res.status(201).json(savedUser)
     }catch(error){
-        res.status(error.status || 400).json({message: error.message})
+        res.status(error.status).json({message: error.message})
     }
 }
 
