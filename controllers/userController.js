@@ -22,7 +22,7 @@ async function addNewUser(req, res){
         .then((response)=> {
             res.setHeader('Access-Control-Max-Age', '3600')
             res.status(201).json(response)})
-        .catch((error)=> res.status(error.status).json({message: error.message}))
+        .catch((error)=> res.status(error.status || 500).json({message: error.message}))
 }
 
 async function updateUser(req, res){
