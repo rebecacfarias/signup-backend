@@ -4,7 +4,7 @@ const userSchema = Joi.object({
   firstName: Joi.string().required(),
   lastName: Joi.string().required(),
   company: Joi.string().required(),
-  jobTitle: Joi.string(),
+  jobTitle: Joi.string().allow(null).empty(''),
   workEmail: Joi.string().email().required(),
   password: Joi.string().required(),
 });
