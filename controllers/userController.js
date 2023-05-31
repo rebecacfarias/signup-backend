@@ -1,4 +1,5 @@
 const UserModel = require('../model/userModel')
+const userSchema = require('../model/userValidation')
 
 async function getUsers(req,res){
         await UserModel.find()
@@ -15,12 +16,20 @@ async function getUserById(req,res){
 }
 
 async function addNewUser(req, res){
-        const user = new UserModel({
-            ...req.body
-        })
-         await user.save()
-        .then((response)=> res.status(201).json(response))
-        .catch((error)=> res.status(error.status).json({message: error.message}))
+        const { error, value } = userSchema.validate(req.body, { abortEarly: false });
+        if (error) {
+            const errorMessages = error.details.map(detail => detail.message);
+            res.status(400).json({ errors: errorMessages });
+        } else {
+            const user = new UserModel(value)
+            await user.save()
+            .then((response)=> {
+                res.status(201).json(response)})
+            .catch((error)=> {
+                console.log(error)
+                res.status(error.status || 500).json({message: error.message})
+            })
+         }
 }
 
 async function updateUser(req, res){
