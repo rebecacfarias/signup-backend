@@ -19,7 +19,9 @@ async function addNewUser(req, res){
             ...req.body
         })
          await user.save()
-        .then((response)=> res.status(201).json(response))
+        .then((response)=> {
+            res.setHeader('Access-Control-Max-Age', '3600')
+            res.status(201).json(response)})
         .catch((error)=> res.status(error.status).json({message: error.message}))
 }
 
