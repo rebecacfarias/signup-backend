@@ -5,6 +5,12 @@ const UserModel = require('../model/userModel')
 
 const router = express.Router()
 
+router.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+
 router.post('/', addNewUser)
 
 router.get('/', getUsers)
