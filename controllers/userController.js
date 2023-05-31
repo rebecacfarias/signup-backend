@@ -26,7 +26,6 @@ async function addNewUser(req, res){
             .then((response)=> {
                 res.status(201).json(response)})
             .catch((error)=> {
-                console.log(error)
                 res.status(error.status || 500).json({message: error.message})
             })
          }
